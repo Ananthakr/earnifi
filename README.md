@@ -36,20 +36,7 @@ This project is built using React Native, providing a cross-platform mobile appl
 
 ### Screenshots
 
-#### Dashboard
-![Dashboard](screenshots/Dashboard.png)
-
-#### Loan Summary
-![Loan Summary](screenshots/Loan-summary.png)
-
-#### Withdrawal
-![Withdrawal](screenshots/Withdrawal.png)
-
-#### Withdrawal Success
-![Withdrawal Success](screenshots/Withdrawal-success.png)
-
-#### History
-![History](screenshots/History.png)
+![All](screenshots/Combined.png)
 
 
 ## Installation and setup
