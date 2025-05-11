@@ -6,8 +6,14 @@ import QuickLink from '../components/QuickLink';
 import { useNavigation } from '@react-navigation/native';
 import { RootStackScreenProps } from '../navigation/types';
 
+const balance = 1090.01;
+const nextDueDate = dayjs().add(1, 'month').format('MMM DD, YYYY');
+const availableCreditLimit = 8000;  
+
 export const Dashboard = ({ navigation }: RootStackScreenProps<'Dashboard'>) => {
- 
+
+  const [formattedBalance, formattedBalanceDecimal] = balance.toFixed(2).toString().split('.');
+
   return (
     <Page backgroundColor="mainBackground">
       <Box flex={1} padding="m">
@@ -20,15 +26,15 @@ export const Dashboard = ({ navigation }: RootStackScreenProps<'Dashboard'>) => 
         <Box alignItems='center' pt="l">
           <Text variant="caption">Loan Balance</Text>
           <Box flexDirection='row' alignItems='flex-end' justifyContent='center' >
-            <Text variant="header">$1000</Text>
-            <Text variant="subheader" pb="xs" color="textSecondary">.00</Text>
+            <Text variant="header">${formattedBalance}</Text>
+            <Text variant="subheader" pb="xs" color="textSecondary">.{formattedBalanceDecimal}</Text>
           </Box>
         </Box>
         <Box flexDirection='row' justifyContent="center" width={'100%'} alignItems='center' pt="s">
-          <Text variant="caption" textAlign='center'>Next due date: {dayjs().add(1, 'month').format('MMM DD, YYYY')}</Text>
+          <Text variant="caption" textAlign='center'>Next due date: {nextDueDate}</Text>
         </Box>
         <Box flexDirection='row' justifyContent="center" width={'100%'} alignItems='center' pt="xs">
-          <Text variant="caption" textAlign='center'>Available credit limit: $8000.00</Text>
+            <Text variant="caption" textAlign='center'>Available credit limit: ${availableCreditLimit}</Text>
         </Box>
 
         <Box flexDirection='row' justifyContent='space-around' alignItems='center' pt="xl">
