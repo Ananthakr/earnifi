@@ -8,6 +8,7 @@ import Button from '../components/Button';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { RootStackScreenProps } from '../navigation/types';
+import { useTransactionStore } from '../store/useTransactionStore';
 
 const validationSchema = Yup.object().shape({
     amount: Yup.string()
@@ -40,12 +41,19 @@ const formatAmount = (text: string): string => {
 
 export const Withdraw = ({ navigation }: RootStackScreenProps<'Withdraw'>) => {
     const { colors } = useTheme<Theme>();
+    const addTransaction = useTransactionStore((state) => state.addTransaction);
 
     const handleSubmit = (values: { amount: string }) => {
-        console.log('Withdraw amount:', values.amount);
-        // Handle withdrawal logic here
-        navigation.replace('WithdrawalStatus',{
-            transactionId: '1234567890',
+        // Add the withdrawal to the store
+        addTransaction({
+            amount: values.amount,
+            type: 'withdrawal',
+            status: 'success'
+        });
+
+        // Navigate to status screen
+        navigation.replace('WithdrawalStatus', {
+            transactionId: `TRX${Date.now().toString().slice(-8)}`,
             amount: values.amount
         });
     };

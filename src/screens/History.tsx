@@ -6,10 +6,14 @@ import { fetchTransactions } from '../services/api';
 import useSWRInfinite from 'swr/infinite';
 import { ActivityIndicator, FlatList, RefreshControl } from 'react-native';
 import dayjs from 'dayjs';
+import { useTransactionStore, Transaction } from '../store/useTransactionStore';
 
 const PAGE_SIZE = 10;
 
 export const History = ({ }: RootStackScreenProps<'History'>) => {
+    // Sync local transactions for optimisitc updates
+    const localTransactions = useTransactionStore((state) => state.transactions);
+
     const getKey = (pageIndex: number, previousPageData: any) => {
         if (previousPageData && !previousPageData.nextPage) return null;
         return [pageIndex + 1];
@@ -24,10 +28,13 @@ export const History = ({ }: RootStackScreenProps<'History'>) => {
         }
     );
 
-    const transactions = data ? data.flatMap(page => page.data) : [];
+    const apiTransactions = data ? data.flatMap(page => page.data) : [];
     const isLoadingMore = isLoading || (size > 0 && data && typeof data[size - 1] === "undefined");
-    const isEmpty = data?.[0]?.data.length === 0;
+    const isEmpty = data?.[0]?.data.length === 0 && localTransactions.length === 0;
     const isReachingEnd = isEmpty || (data && data[data.length - 1]?.nextPage === null);
+
+    // Combine local and API transactions, with local transactions appearing first
+    const allTransactions = [...localTransactions, ...apiTransactions] as Transaction[];
 
     const onRefresh = () => {
         mutate();
@@ -39,7 +46,7 @@ export const History = ({ }: RootStackScreenProps<'History'>) => {
         }
     };
 
-    const renderTransaction = ({ item }: { item: any }) => (
+    const renderTransaction = ({ item }: { item: Transaction }) => (
         <Box
             flexDirection='row'
             justifyContent='space-between'
@@ -59,7 +66,6 @@ export const History = ({ }: RootStackScreenProps<'History'>) => {
             <Box alignItems="flex-end">
                 <Text
                     variant="body"
-                    color={'textPrimary'}
                 >
                     ${item.amount}
                 </Text>
@@ -84,14 +90,14 @@ export const History = ({ }: RootStackScreenProps<'History'>) => {
             <Box flex={1}>
                 {/* Flashlist can be used here to improve performance */}
                 <FlatList
-                    data={transactions}
+                    data={allTransactions}
                     renderItem={renderTransaction}
                     keyExtractor={item => item.id}
                     onEndReached={onEndReached}
                     onEndReachedThreshold={0.5}
                     refreshControl={
                         <RefreshControl
-                            refreshing={transactions.length > 0 && isValidating}
+                            refreshing={allTransactions.length > 0 && isValidating}
                             onRefresh={onRefresh}
                         />
                     }
