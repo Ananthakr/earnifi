@@ -36,7 +36,7 @@ This project is built using React Native, providing a cross-platform mobile appl
 
 ### Screenshots
 
-![All](screenshots/Combined.png)
+![All](screenshots/Combined.jpeg)
 
 
 ## Installation and setup
