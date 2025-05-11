@@ -25,7 +25,7 @@ export const Dashboard = ({ navigation }: RootStackScreenProps<'Dashboard'>) => 
           </Box>
         </Box>
         <Box flexDirection='row' justifyContent="center" width={'100%'} alignItems='center' pt="s">
-          <Text variant="caption" textAlign='center'>Next due date: {dayjs().add(1, 'month').format('MM/DD/YYYY')}</Text>
+          <Text variant="caption" textAlign='center'>Next due date: {dayjs().add(1, 'month').format('MMM DD, YYYY')}</Text>
         </Box>
         <Box flexDirection='row' justifyContent="center" width={'100%'} alignItems='center' pt="xs">
           <Text variant="caption" textAlign='center'>Available credit limit: $8000.00</Text>
