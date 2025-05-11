@@ -66,7 +66,7 @@ export const WithdrawalStatus = ({ navigation, route }: RootStackScreenProps<'Wi
                         transactionId={transactionId}
                         amount={amount}
                         availableLimit={"8000"}
-                        timeTaken={"12seconds"}
+                        timeTaken={"12 seconds"}
                     />
                 </Box>
                 <Box alignItems='center' mt="xxl" pb="m">

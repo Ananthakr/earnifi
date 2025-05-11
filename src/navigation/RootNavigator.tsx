@@ -5,6 +5,8 @@ import { Dashboard } from '../screens/Dashboard';
 import { RootStackParamList } from './types';
 import { Withdraw } from '../screens/Withdraw';
 import { WithdrawalStatus } from '../screens/WithdrawalStatus';
+import { History } from '../screens/History';
+import { Summary } from '../screens/Summary';
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export const RootNavigator = () => {
@@ -42,6 +44,20 @@ export const RootNavigator = () => {
           options={{
             title: 'Withdrawal Status',
             headerShown: false,
+          }}
+        />
+        <Stack.Screen 
+          name="History" 
+          component={History}
+          options={{
+            title: 'History',
+          }}
+        />
+        <Stack.Screen 
+          name="Summary" 
+          component={Summary}
+          options={{
+            title: 'Summary',
           }}
         />
       </Stack.Navigator>

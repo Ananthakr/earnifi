@@ -7,6 +7,8 @@ export type RootStackParamList = {
     transactionId: string;
     amount: string;
   };
+  History: undefined;
+  Summary: undefined;
   // Add more screens here as needed
 };
 

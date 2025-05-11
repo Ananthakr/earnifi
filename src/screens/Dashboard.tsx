@@ -35,8 +35,12 @@ export const Dashboard = ({ navigation }: RootStackScreenProps<'Dashboard'>) => 
           <QuickLink icon="wallet-outline" title="Withdraw" onPress={() => {
             navigation.navigate("Withdraw");
           }} />
-          <QuickLink icon="time-outline" title="History" onPress={() => { }} />
-          <QuickLink icon="stats-chart-outline" title="Summary" onPress={() => { }} />
+          <QuickLink icon="time-outline" title="History" onPress={() => {
+            navigation.navigate("History");
+          }} />
+          <QuickLink icon="stats-chart-outline" title="Summary" onPress={() => {
+            navigation.navigate("Summary");
+          }} />
         </Box>
       </Box>
     </Page>
