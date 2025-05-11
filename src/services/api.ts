@@ -7,8 +7,8 @@ const generateTransaction = (id: number) => ({
     status: Math.random() > 0.2 ? 'success' : 'failed'
 });
 
-// Generate exactly 100 mock transactions
-const TOTAL_TRANSACTIONS = 100;
+// Generate exactly 50 mock transactions
+const TOTAL_TRANSACTIONS = 50;
 const mockTransactions = Array.from({ length: TOTAL_TRANSACTIONS }, (_, i) => generateTransaction(i + 1));
 
 // Mock API function
